@@ -149,9 +149,9 @@ Example:
 ```
 Province
 └── ACEH (11)
-    └── SIMEULUE (11.01)
-        └── TEUPAH SELATAN (11.01.010)
-            └── LATIUNG (11.010.10001)
+    └── SIMEULUE (1101)
+        └── TEUPAH SELATAN (1101010)
+            └── LATIUNG (1101010001)
 ```
 
 This allows users to determine the hierarchy without performing additional joins.
