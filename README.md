@@ -54,9 +54,9 @@ Example
 
 ## city.csv
 
-Contains all Kabupaten and Kota.
+Contains all city/region.
 
-Each record stores its parent province information.
+Each record stores its province information.
 
 ### Columns
 
@@ -66,10 +66,10 @@ Each record stores its parent province information.
 | `prov_nama_bps` | Province BPS name |
 | `prov_kode_dagri` | Province Kemendagri code |
 | `prov_nama_dagri` | Province Kemendagri name |
-| `kode_bps` | Kabupaten/Kota BPS code |
-| `nama_bps` | Kabupaten/Kota BPS name |
-| `kode_dagri` | Kabupaten/Kota Kemendagri code |
-| `nama_dagri` | Kabupaten/Kota Kemendagri name |
+| `kode_bps` | City/Region BPS code |
+| `nama_bps` | City/Region BPS name |
+| `kode_dagri` | City/Region Kemendagri code |
+| `nama_dagri` | City/Region Kemendagri name |
 
 Example
 
@@ -81,22 +81,22 @@ Example
 
 ## district.csv
 
-Contains all Kecamatan.
+Contains all districts.
 
-Each record stores its parent Kabupaten/Kota information.
+Each record stores its city/region information.
 
 ### Columns
 
 | Column | Description |
 |---------|-------------|
-| `city_kode_bps` | Kabupaten/Kota BPS code |
-| `city_nama_bps` | Kabupaten/Kota BPS name |
-| `city_kode_dagri` | Kabupaten/Kota Kemendagri code |
-| `city_nama_dagri` | Kabupaten/Kota Kemendagri name |
-| `kode_bps` | Kecamatan BPS code |
-| `nama_bps` | Kecamatan BPS name |
-| `kode_dagri` | Kecamatan Kemendagri code |
-| `nama_dagri` | Kecamatan Kemendagri name |
+| `city_kode_bps` | City/Region BPS code |
+| `city_nama_bps` | City/Region BPS name |
+| `city_kode_dagri` | City/Region Kemendagri code |
+| `city_nama_dagri` | City/Region Kemendagri name |
+| `kode_bps` | District BPS code |
+| `nama_bps` | District BPS name |
+| `kode_dagri` | District Kemendagri code |
+| `nama_dagri` | District Kemendagri name |
 
 Example
 
@@ -108,22 +108,22 @@ Example
 
 ## subdistrict.csv
 
-Contains all Desa/Kelurahan.
+Contains all subdistrict/village.
 
-Each record stores its parent Kecamatan information.
+Each record stores its district information.
 
 ### Columns
 
 | Column | Description |
 |---------|-------------|
-| `dist_kode_bps` | Kecamatan BPS code |
-| `dist_nama_bps` | Kecamatan BPS name |
-| `dist_kode_dagri` | Kecamatan Kemendagri code |
-| `dist_nama_dagri` | Kecamatan Kemendagri name |
-| `kode_bps` | Desa/Kelurahan BPS code |
-| `nama_bps` | Desa/Kelurahan BPS name |
-| `kode_dagri` | Desa/Kelurahan Kemendagri code |
-| `nama_dagri` | Desa/Kelurahan Kemendagri name |
+| `dist_kode_bps` | District BPS code |
+| `dist_nama_bps` | District BPS name |
+| `dist_kode_dagri` | District Kemendagri code |
+| `dist_nama_dagri` | District Kemendagri name |
+| `kode_bps` | Subdistrict/Village BPS code |
+| `nama_bps` | Subdistrict/Village BPS name |
+| `kode_dagri` | Subdistrict/Village Kemendagri code |
+| `nama_dagri` | Subdistrict/Village Kemendagri name |
 
 Example
 
@@ -139,9 +139,9 @@ The datasets are linked through the parent columns.
 
 ```
 Province
-    └── City / Regency
+    └── City/Regency
             └── District
-                    └── Subdistrict / Village
+                    └── Subdistrict/Village
 ```
 
 Example:
