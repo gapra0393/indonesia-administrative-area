@@ -1,129 +1,197 @@
-This repository contains Indonesia administrative area reference data obtained from the Badan Pusat Statistik (BPS) REST API.
+# Indonesia Administrative Areas (BPS) 2025
 
-The dataset is intended for developers, data engineers, analysts, and system integrators who need a hierarchical reference of Indonesian administrative regions.
+This repository contains Indonesia administrative area reference data sourced from **Badan Pusat Statistik (BPS)** through the SIG BPS REST API.
 
-Data Source
+The dataset includes all administrative levels from **Province** to **Village/Subdistrict (Desa/Kelurahan)** and is exported into CSV format.
 
-Source:
+> **Data Source**
+>
+> https://sig.bps.go.id/rest-bridging/getwilayah
 
-https://sig.bps.go.id/rest-bridging/getwilayah
+---
 
-Reference period:
+# Dataset Version
 
-2025_2.2025
+- **Source**: Badan Pusat Statistik (BPS)
+- **Period**: `2025_2.2025`
+- **Export Format**: CSV
 
-Data provider:
+---
 
-Badan Pusat Statistik (BPS), Republic of Indonesia
-Dataset
+# Files
 
-The repository contains four CSV files.
+| File | Description |
+|------|-------------|
+| `province.csv` | List of all provinces |
+| `city.csv` | List of all regencies/cities (Kabupaten/Kota) |
+| `district.csv` | List of all districts (Kecamatan) |
+| `subdistrict.csv` | List of all villages/subdistricts (Desa/Kelurahan) |
 
-File	Administrative Level
-province.csv	Province
-city.csv	Regency / City (Kabupaten / Kota)
-district.csv	District (Kecamatan)
-subdistrict.csv	Village / Urban Village (Desa / Kelurahan)
-CSV Structure
-province.csv
+---
 
-Contains all provinces in Indonesia.
+# File Structure
 
-Column	Description
-kode_bps	Province code issued by BPS
-nama_bps	Province name according to BPS
-kode_dagri	Province code issued by Ministry of Home Affairs (Kemendagri)
-nama_dagri	Province name according to Kemendagri
+## province.csv
+
+Contains province-level administrative areas.
+
+### Columns
+
+| Column | Description |
+|---------|-------------|
+| `kode_bps` | Province code from BPS |
+| `nama_bps` | Province name from BPS |
+| `kode_dagri` | Province code from Kemendagri |
+| `nama_dagri` | Province name from Kemendagri |
+
+Example
+
+| kode_bps | nama_bps | kode_dagri | nama_dagri |
+|----------|-----------|------------|------------|
+|11|ACEH|11|ACEH|
+
+---
+
+## city.csv
+
+Contains all Kabupaten and Kota.
+
+Each record stores its parent province information.
+
+### Columns
+
+| Column | Description |
+|---------|-------------|
+| `prov_kode_bps` | Province BPS code |
+| `prov_nama_bps` | Province BPS name |
+| `prov_kode_dagri` | Province Kemendagri code |
+| `prov_nama_dagri` | Province Kemendagri name |
+| `kode_bps` | Kabupaten/Kota BPS code |
+| `nama_bps` | Kabupaten/Kota BPS name |
+| `kode_dagri` | Kabupaten/Kota Kemendagri code |
+| `nama_dagri` | Kabupaten/Kota Kemendagri name |
+
+Example
+
+| prov_kode_bps | prov_nama_bps | prov_kode_dagri | prov_nama_dagri | kode_bps | nama_bps | kode_dagri | nama_dagri |
+|-----------------|-----------------|-------------------|-------------------|-----------|-----------|-------------|-------------|
+|11|ACEH|11|ACEH|1101|SIMEULUE|11.09|KABUPATEN SIMEULUE|
+
+---
+
+## district.csv
+
+Contains all Kecamatan.
+
+Each record stores its parent Kabupaten/Kota information.
+
+### Columns
+
+| Column | Description |
+|---------|-------------|
+| `city_kode_bps` | Kabupaten/Kota BPS code |
+| `city_nama_bps` | Kabupaten/Kota BPS name |
+| `city_kode_dagri` | Kabupaten/Kota Kemendagri code |
+| `city_nama_dagri` | Kabupaten/Kota Kemendagri name |
+| `kode_bps` | Kecamatan BPS code |
+| `nama_bps` | Kecamatan BPS name |
+| `kode_dagri` | Kecamatan Kemendagri code |
+| `nama_dagri` | Kecamatan Kemendagri name |
+
+Example
+
+| city_kode_bps | city_nama_bps | city_kode_dagri | city_nama_dagri | kode_bps | nama_bps | kode_dagri | nama_dagri |
+|-----------------|-----------------|-------------------|-------------------|-----------|-----------|-------------|-------------|
+|1101|SIMEULUE|11.09|KABUPATEN SIMEULUE|1101010|TEUPAH SELATAN|11.09.07|TEUPAH SELATAN|
+
+---
+
+## subdistrict.csv
+
+Contains all Desa/Kelurahan.
+
+Each record stores its parent Kecamatan information.
+
+### Columns
+
+| Column | Description |
+|---------|-------------|
+| `dist_kode_bps` | Kecamatan BPS code |
+| `dist_nama_bps` | Kecamatan BPS name |
+| `dist_kode_dagri` | Kecamatan Kemendagri code |
+| `dist_nama_dagri` | Kecamatan Kemendagri name |
+| `kode_bps` | Desa/Kelurahan BPS code |
+| `nama_bps` | Desa/Kelurahan BPS name |
+| `kode_dagri` | Desa/Kelurahan Kemendagri code |
+| `nama_dagri` | Desa/Kelurahan Kemendagri name |
+
+Example
+
+| dist_kode_bps | dist_nama_bps | dist_kode_dagri | dist_nama_dagri | kode_bps | nama_bps | kode_dagri | nama_dagri |
+|-----------------|-----------------|-------------------|-------------------|-----------|-----------|-------------|-------------|
+|3174010|KEBON JERUK|31.73.08|KEBON JERUK|3174010001|JOGLO|31.73.08.1005|JOGLO|
+
+---
+
+# Parent-Child Relationship
+
+The datasets are linked through the parent columns.
+
+```
+Province
+    └── City / Regency
+            └── District
+                    └── Subdistrict / Village
+```
 
 Example:
 
-kode_bps	nama_bps	kode_dagri	nama_dagri
-11	ACEH	11	ACEH
-city.csv
-
-Contains all regencies and cities.
-
-Each record includes its parent province.
-
-Column	Description
-parent_kode_bps	Parent province BPS code
-parent_nama_bps	Parent province name
-parent_kode_dagri	Parent province Kemendagri code
-parent_nama_dagri	Parent province name according to Kemendagri
-kode_bps	Regency/City BPS code
-nama_bps	Regency/City name according to BPS
-kode_dagri	Regency/City Kemendagri code
-nama_dagri	Regency/City name according to Kemendagri
-district.csv
-
-Contains all districts (Kecamatan).
-
-Each record includes its parent regency/city.
-
-Column	Description
-parent_kode_bps	Parent Regency/City BPS code
-parent_nama_bps	Parent Regency/City name
-parent_kode_dagri	Parent Regency/City Kemendagri code
-parent_nama_dagri	Parent Regency/City name according to Kemendagri
-kode_bps	District BPS code
-nama_bps	District name according to BPS
-kode_dagri	District Kemendagri code
-nama_dagri	District name according to Kemendagri
-subdistrict.csv
-
-Contains all villages (Desa/Kelurahan).
-
-Each record includes its parent district.
-
-Column	Description
-parent_kode_bps	Parent District BPS code
-parent_nama_bps	Parent District name
-parent_kode_dagri	Parent District Kemendagri code
-parent_nama_dagri	Parent District name according to Kemendagri
-kode_bps	Village BPS code
-nama_bps	Village name according to BPS
-kode_dagri	Village Kemendagri code
-nama_dagri	Village name according to Kemendagri
-Hierarchical Relationship
+```
 Province
-└── Regency / City
-    └── District
-        └── Village (Desa / Kelurahan)
+└── ACEH (11)
+    └── SIMEULUE (11.01)
+        └── TEUPAH SELATAN (11.01.010)
+            └── LATIUNG (11.010.10001)
+```
 
-The parent columns are included to make the relationship explicit, allowing users to identify the parent administrative area without performing additional joins.
+This allows users to determine the hierarchy without performing additional joins.
 
-Character Encoding
+---
 
-All CSV files are encoded using UTF-8 with BOM (utf-8-sig) for compatibility with:
+# Data Source
 
-Microsoft Excel
-LibreOffice Calc
-Google Sheets
-PostgreSQL
-MySQL
-SQL Server
-Most modern programming languages
-Intended Use
+The data is retrieved from the official BPS API.
 
-This dataset can be used for:
+```
+GET https://sig.bps.go.id/rest-bridging/getwilayah
+```
 
-Master/reference data
-ERP systems
-Government information systems
-Geographic Information Systems (GIS)
-Customer address normalization
-ETL pipelines
-Data warehousing
-Analytics and reporting
-Form dropdowns for Indonesian administrative areas
-Disclaimer
+Parameters
 
-This repository redistributes administrative reference data retrieved from the public BPS API. The original data remains the property of Badan Pusat Statistik (BPS).
+| Parameter | Description |
+|-----------|-------------|
+| `level` | Administrative level (`provinsi`, `kabupaten`, `kecamatan`, `desa`) |
+| `parent` | Parent BPS code |
+| `periode_merge` | Data version |
 
-Users should refer to the official BPS website for the latest updates and authoritative information.
+Example
 
-License
+```
+https://sig.bps.go.id/rest-bridging/getwilayah?level=provinsi&parent=0&periode_merge=2025_2.2025
+```
 
-This repository does not claim ownership of the administrative data.
+---
 
-Please comply with the terms and conditions of the original data provider (BPS) when using or redistributing this dataset.
+# License
+
+This repository republishes publicly accessible administrative reference data obtained from the official BPS API.
+
+Users should refer to the official BPS website for the latest updates and any applicable terms of use.
+
+---
+
+# Disclaimer
+
+This repository is **not affiliated with or maintained by Badan Pusat Statistik (BPS)**.
+
+The data is provided for educational, development, and research purposes. While every effort has been made to preserve the original data accurately, users should verify critical information against the official BPS source before using it in production systems.
